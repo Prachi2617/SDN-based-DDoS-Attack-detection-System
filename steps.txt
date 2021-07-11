@@ -1,5 +1,5 @@
 cd pox
-python ./pox.py​ l3_detectionEntropy
+python ./pox.py​ Entropy_detection
 
 
 ---new terminal---
