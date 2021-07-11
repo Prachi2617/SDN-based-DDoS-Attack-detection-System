@@ -1,0 +1,34 @@
+cd pox
+python ./pox.py​ l3_detectionEntropy
+
+
+---new terminal---
+sudo mn --switch ovsk --topo tree,depth=2,fanout=8 --controller=remote,ip=127.0.0.1,port=6633
+
+mininet> xterm h1 h2 h3 h4
+-h1 node- cd mininet/custom
+		- python traffic.py -s 2 -e 65
+
+-h2 node- cd mininet/custom
+		- python attack.py 10.0.0.4
+		
+-h3 node -ping 10.0.0.4
+mininet> h1 wireshark & / to visualize the traffic in h1 node
+
+-------------------------------------------------------
+1. syn flooding attack
+
+verbose count data synPckt port flooding attack destination
+hping3 -V -c 1000 -d 100 -S -p 6633 --flood 10.0.0.64 		-> syn flooding attack
+In flooding kind of attack no of flow entries spikes which is used as a parameter for ddos detection
+
+
+
+In bandwidth king of attack the data size increases which is used as indicator for the attack
+
+LAND attack local area denial attack
+ICMP flooding same src and dest ip
+
+hping3 -1 --flood -a 10.0.0.64 10.255.255.255	//icmp flood attack		-- detected
+
+
